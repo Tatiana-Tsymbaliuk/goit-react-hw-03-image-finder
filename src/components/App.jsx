@@ -1,16 +1,22 @@
-export const App = () => {
+import React from 'react';
+import Searchbar from "components/Searchbar/Searchbar";
+import ImageGallery from "components/ImageGallery/ImageGallery"
+
+
+
+export class App extends React.Component{
+  state={
+    nameSearch:'',
+  }
+handleFormSubmit= nameSearch=>{
+  this.setState({nameSearch});
+}
+
+  render(){
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <Searchbar onSubmit={this.handleFormSubmit}/>
+      <ImageGallery nameSearch={this.state.nameSearch}/>
     </div>
-  );
+  )};
 };
