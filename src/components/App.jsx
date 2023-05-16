@@ -6,7 +6,7 @@ import ImageGallery from "components/ImageGallery/ImageGallery"
 
 export class App extends React.Component{
   state={
-    nameSearch:'',
+  nameSearch:'',
   }
 handleFormSubmit= nameSearch=>{
   this.setState({nameSearch});

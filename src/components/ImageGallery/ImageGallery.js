@@ -7,32 +7,53 @@ import fetchFoto from '../../api/api'
 
 export default class ImageGallery extends React.Component{
   state={
-        fotos:null,
+        fotos:[],
+        currentPage:1,
         loading: false,
         error: null,
+
   }   
      async componentDidUpdate(prevProps, prevState){
         const nameSearch =this.props.nameSearch
         const prevName = prevProps.nameSearch
         if(prevName!==nameSearch){
-                this.setState({loading: true})
-              try {
-                const {hits} = await fetchFoto(nameSearch)
-                this.setState({fotos: hits})
-              } catch (error) {
-                this.setState({error})
-              }finally{
-                this.setState({loading:false})
-              }
-                
-                // .catch(error=>this.setState({error}))
-                // .(()=>this.setState({loading:false}))
+                this.getFoto();
+              // try {
+              //   const {hits} = await fetchFoto(nameSearch)
+              //   this.setState({fotos: hits})
+              // } catch (error) {
+              //   this.setState({error})
+              // }finally{
+              //   this.setState({loading:false})
+              // }
+              
         }
-      }  
+      } 
+   getFoto = async () =>{
+    const nameSearch =this.props.nameSearch
+    const {currentPage} = this.state;
+    this.setState({loading: true})
+    try {
+      const {hits} = await fetchFoto(nameSearch, currentPage)
+      this.setState(prevState => ({
+        fotos: [...prevState.fotos, ...hits],
+                currentPage: prevState.currentPage + 1,
+              }));
+        
+              if (currentPage !== 1) {
+                
+              }
+            } catch (error) {
+              console.log('Smth wrong with App fetch', error);
+              this.setState({ error });
+            }finally{
+            this.setState({loading:false})
+            }
+            }
 
         render(){
                 const {fotos, loading, error} = this.state
-                const {nameSearch} = this.props
+                const {nameSearch} = this.props              
         return(
           <div>      
         <ul className="ImageGallery">
@@ -40,7 +61,7 @@ export default class ImageGallery extends React.Component{
                 {!nameSearch&&<div>Vvedite name foto</div>}
                 {fotos ? ( <ImageGalleryItem items={fotos}/>) : (<div></div>)}
       </ul>
-      {fotos ? ( <Button/>) : (<div></div>)}
+      {nameSearch?( <Button onLoadFoto ={this.getPhoto}/>) : (<div></div>)}
      
       {error&&<h1>Все пропало...</h1>} 
       </div>  
