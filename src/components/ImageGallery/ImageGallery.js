@@ -34,7 +34,7 @@ export default class ImageGallery extends React.Component{
    //const currentPage = this.state;
     this.setState({loading: true})
     try {
-      const {hits} = await fetchFoto(nameSearch)
+      const {hits} = await fetchFoto(nameSearch, this.state.currentPage)
       this.setState(prevState => ({
         fotos: [...prevState.fotos, ...hits],
         
