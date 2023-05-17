@@ -8,7 +8,7 @@ import fetchFoto from '../../api/api'
 export default class ImageGallery extends React.Component{
   state={
         fotos:[],
-        currentPage:1,
+        currentPage:'',
         loading: false,
         error: null,
 
@@ -16,7 +16,7 @@ export default class ImageGallery extends React.Component{
      async componentDidUpdate(prevProps, prevState){
         const nameSearch =this.props.nameSearch
         const prevName = prevProps.nameSearch
-        if(prevName!==nameSearch){
+        if(prevName!==nameSearch & this.currentPage!==prevState.currentPage){
                 this.getFoto();
               // try {
               //   const {hits} = await fetchFoto(nameSearch)
@@ -29,27 +29,28 @@ export default class ImageGallery extends React.Component{
               
         }
       } 
-   getFoto = async () =>{
+  getFoto = async () =>{
     const nameSearch =this.props.nameSearch
-    const {currentPage} = this.state;
+   // const currentPage = this.state;
     this.setState({loading: true})
     try {
-      const {hits} = await fetchFoto(nameSearch, currentPage)
+      const {hits} = await fetchFoto(nameSearch)
       this.setState(prevState => ({
         fotos: [...prevState.fotos, ...hits],
-                currentPage: prevState.currentPage + 1,
+        //currentPage: prevState.currentPage + 1,
               }));
-        
-              if (currentPage !== 1) {
-                
-              }
+             
             } catch (error) {
-              console.log('Smth wrong with App fetch', error);
               this.setState({ error });
             }finally{
             this.setState({loading:false})
             }
             }
+
+  loadFoto = ()=>{
+    this.setState(prevState =>({currentPage:prevState.currentPage+1}))
+    
+  }
 
         render(){
                 const {fotos, loading, error} = this.state
@@ -61,7 +62,7 @@ export default class ImageGallery extends React.Component{
                 {!nameSearch&&<div>Vvedite name foto</div>}
                 {fotos ? ( <ImageGalleryItem items={fotos}/>) : (<div></div>)}
       </ul>
-      {nameSearch?( <Button onLoadFoto ={this.getPhoto}/>) : (<div></div>)}
+      {nameSearch?( <Button onLoadFoto ={this.loadFoto}/>) : (<div></div>)}
      
       {error&&<h1>Все пропало...</h1>} 
       </div>  
