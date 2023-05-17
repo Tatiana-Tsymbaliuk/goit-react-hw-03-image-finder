@@ -31,13 +31,13 @@ export default class ImageGallery extends React.Component{
       } 
   getFoto = async () =>{
     const nameSearch =this.props.nameSearch
-   // const currentPage = this.state;
+   //const currentPage = this.state;
     this.setState({loading: true})
     try {
       const {hits} = await fetchFoto(nameSearch)
       this.setState(prevState => ({
         fotos: [...prevState.fotos, ...hits],
-        //currentPage: prevState.currentPage + 1,
+        
               }));
              
             } catch (error) {
