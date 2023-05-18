@@ -16,7 +16,7 @@ handleSubmit = event=>{
                 return;
         }
         this.props.onSubmit(this.state.nameSearch);
-        this.setState({nameSearch:''})
+        //this.setState({nameSearch:''})
 }
         render(){
                 return(
