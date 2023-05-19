@@ -1,8 +1,6 @@
 import React from 'react';
-import Searchbar from "components/Searchbar/Searchbar";
-import ImageGallery from "components/ImageGallery/ImageGallery"
-
-
+import Searchbar from "../components/Searchbar/Searchbar";
+import ImageGallery from "../components/ImageGallery/ImageGallery";
 
 export class App extends React.Component{
   state={
@@ -11,7 +9,6 @@ export class App extends React.Component{
 handleFormSubmit= nameSearch=>{
   this.setState({nameSearch});
 }
-
   render(){
   return (
     <div>
