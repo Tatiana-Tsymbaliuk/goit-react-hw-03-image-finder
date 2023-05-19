@@ -24,7 +24,10 @@ handleKeyDown = event => {
                     }}
         render(){ 
                 return(createPortal(  <div class="Overlay" onClick={this.handleBackdropClick}>
-                <div class="Modal">{this.props.children}</div>
+                <div class="Modal">
+                {/* <img src={this.props.largeImage} alt="" /> */}
+                {this.props.children}
+                </div>
               </div>, modalRoot)
               ) 
         }

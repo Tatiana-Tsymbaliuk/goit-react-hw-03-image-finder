@@ -53,9 +53,9 @@ export default class ImageGallery extends React.Component{
   loadFoto = ()=>{
     this.setState(prevState =>({currentPage:prevState.currentPage+=1}))   
   }
-  handleGalleryItem = fullImageUrl => {
+  handleGalleryItem = (event) => {
         this.setState({
-          largeImage: fullImageUrl,
+          largeImage: event.currentTarget.value,
           showModal: true,
         });
       };
@@ -71,8 +71,8 @@ export default class ImageGallery extends React.Component{
                 const {fotos, loading, error, showModal, largeImage } = this.state
                 //const {nameSearch} = this.props              
         return(
-          <div> <div>
-            <button type='button' onClick={this.toggleModal}>Open Modal</button> </div> 
+          <div> 
+            {/* <div><button type='button' onClick={this.toggleModal}>Open Modal</button> </div>  */}
            {showModal&& <Modal onClose ={this.toggleModal}>
            <button type="button" onClick={this.toggleModal}><FaTimes/></button>
             
