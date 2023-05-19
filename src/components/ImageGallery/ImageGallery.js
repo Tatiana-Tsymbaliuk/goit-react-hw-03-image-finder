@@ -57,7 +57,8 @@ export default class ImageGallery extends React.Component{
           };
 
         render(){
-                const {fotos, loading, error, showModal, largeImage } = this.state            
+            const {fotos, loading, error, showModal, largeImage } = this.state;
+            const needToShowLoadMore = (fotos.length >= this.state.currentPage*12);          
         return(
           <div> 
            {showModal&& <Modal onClose ={this.toggleModal}>
@@ -66,7 +67,7 @@ export default class ImageGallery extends React.Component{
           <ul className="ImageGallery">
            {fotos ? ( <ImageGalleryItem items={fotos} onImageClick={this.handleGalleryItem} />) : (<div></div>)}
           </ul>
-           {fotos.length >=this.state.currentPage*12?( <Button onLoadFoto ={this.loadFoto}/>) : (<div></div>)}
+           {needToShowLoadMore?( <Button onLoadFoto ={this.loadFoto}/>):<div></div>}
            {loading&&<Loader/>}
            {error&&<h1>Error...</h1>} 
           </div>       
