@@ -8,9 +8,7 @@ const ImageGalleryItem = ({items, onImageClick}) => {
             alt={item.tags} 
             onClick={()=>onImageClick(item.largeImageURL)}
             className='ImageGalleryItem-image'/>
-          </li>
-          
+          </li>         
               ))}
           
-        
 export default ImageGalleryItem;
