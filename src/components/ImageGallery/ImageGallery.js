@@ -5,7 +5,7 @@ import './ImageGallery.css';
 import Button from 'components/Button/Button';
 import fetchFoto from '../../api/api'
 import Modal from 'components/Modal/Modal';
-import {FaTimes} from "react-icons/fa";
+// import {FaTimes} from "react-icons/fa";
 
 export default class ImageGallery extends React.Component{
   state={
@@ -53,11 +53,15 @@ export default class ImageGallery extends React.Component{
   loadFoto = ()=>{
     this.setState(prevState =>({currentPage:prevState.currentPage+=1}))   
   }
-  handleGalleryItem = (event) => {
+  handleGalleryItem = (largeImageSrc) => {
+    
         this.setState({
-          largeImage: event.currentTarget.value,
+          
+          largeImage: largeImageSrc,
           showModal: true,
         });
+        console.log('Vasya:', largeImageSrc);
+     
       };
   //  fullImage = handleGalleryItem(fotos.fullImageUrl); 
       toggleModal = () => {
@@ -74,7 +78,7 @@ export default class ImageGallery extends React.Component{
           <div> 
             {/* <div><button type='button' onClick={this.toggleModal}>Open Modal</button> </div>  */}
            {showModal&& <Modal onClose ={this.toggleModal}>
-           <button type="button" onClick={this.toggleModal}><FaTimes/></button>
+           {/* <button type="button" onClick={this.toggleModal}><FaTimes/></button> */}
             
             <img src={largeImage} alt="" />
             

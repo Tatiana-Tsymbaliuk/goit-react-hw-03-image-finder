@@ -6,7 +6,7 @@ const ImageGalleryItem = ({items, onImageClick}) => {
                  <li className="ImageGalleryItem" key ={item.id}>
             <img src={item.webformatURL } 
             alt={item.tags} 
-            onClick={onImageClick}
+            onClick={()=>onImageClick(item.largeImageURL)}
             className='ImageGalleryItem-image'/>
           </li>
           
