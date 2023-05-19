@@ -1,9 +1,9 @@
 import React from 'react';
 import Loader from '../Loader/Loader';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
-import './ImageGallery.css';
+import '../ImageGallery/ImageGallery.css';
 import Button from '../Button/Button';
-import fetchFoto from '../../api/api'
+import fetchFoto from '../../api/api';
 import Modal from '../Modal/Modal';
 
 export default class ImageGallery extends React.Component{
