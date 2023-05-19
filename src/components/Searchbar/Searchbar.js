@@ -1,5 +1,5 @@
 import React from 'react';
-import {FaSistrix} from "react-icons/fa";
+import {FaSistrix} from 'react-icons/fa';
 import './Searchbar.css'
 
 export default class Searchbar extends React.Component{
