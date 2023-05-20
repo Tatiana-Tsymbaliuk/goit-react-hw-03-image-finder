@@ -15,7 +15,7 @@ export default class ImageGallery extends React.Component{
         showModal: false,
         largeImage: '',
         totalAmount:'0',
-        currentAmount:'0',
+        currentAmount: 0,
   }   
  
   async componentDidUpdate(prevProps, prevState){
@@ -34,7 +34,7 @@ export default class ImageGallery extends React.Component{
         fotos: [...prevState.fotos, ...hits],
               })); 
       this.setState({totalAmount: totalHits});
-      this.setState(prevState =>({currentAmount:prevState.currentAmount+ hits.length,}))         
+      this.setState(prevState =>({currentAmount:prevState.currentAmount + hits.length,}))         
             } catch (error) {
               this.setState({ error });
             }finally{
