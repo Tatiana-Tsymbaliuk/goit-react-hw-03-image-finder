@@ -14,6 +14,8 @@ export default class ImageGallery extends React.Component{
         error: null,
         showModal: false,
         largeImage: '',
+        totalAmount:'0',
+        currentAmount:'0',
   }   
  
   async componentDidUpdate(prevProps, prevState){
@@ -27,10 +29,12 @@ export default class ImageGallery extends React.Component{
     const nameSearch =this.props.nameSearch
     this.setState({loading: true})
     try {
-      const {hits} = await fetchFoto(nameSearch, this.state.currentPage)
+      const {hits, totalHits} = await fetchFoto(nameSearch, this.state.currentPage)
       this.setState(prevState => ({
         fotos: [...prevState.fotos, ...hits],
-              }));          
+              })); 
+      this.setState({totalAmount: totalHits});
+      this.setState(prevState =>({currentAmount:prevState.currentAmount+ hits.length,}))         
             } catch (error) {
               this.setState({ error });
             }finally{
@@ -57,19 +61,21 @@ export default class ImageGallery extends React.Component{
           };
 
         render(){
-            const {fotos, loading, error, showModal, largeImage } = this.state;
-            const needToShowLoadMore = (fotos.length >= this.state.currentPage*12);          
+            const {fotos, loading, showModal, largeImage } = this.state;
+            // const needToShowLoadMore = fotos.length !== 0 &&this.state.currentAmount !== this.state.totalAmount ;          
         return(
           <div> 
            {showModal&& <Modal onClose ={this.toggleModal}>
            <img src={largeImage} alt="" />
            </Modal> }    
           <ul className="ImageGallery">
-           {fotos ? ( <ImageGalleryItem items={fotos} onImageClick={this.handleGalleryItem} />) : (<div></div>)}
+           { loading ? (<Loader/> ) : (<ImageGalleryItem items={fotos} onImageClick={this.handleGalleryItem} />)}
           </ul>
-           {needToShowLoadMore?( <Button onLoadFoto ={this.loadFoto}/>):<div></div>}
-           {loading&&<Loader/>}
-           {error&&<h1>Error...</h1>} 
+           {fotos.length !== 0 &&
+        this.state.currentAmount !== this.state.totalAmount?( <Button onLoadFoto ={this.loadFoto}/>):(false)}
+         
+
           </div>       
-          )} 
+          );
+        } 
 }
