@@ -16,8 +16,13 @@ handleSubmit = event=>{
                 return;
         }
         this.props.onSubmit(this.state.nameSearch);
-        //this.setState({nameSearch:''})
+        this.setState({nameSearch:''})
+        // this.resetForm();
 }
+// resetForm = () =>
+//     this.setState({
+//         nameSearch: '',
+//     });
         render(){
                 return(
                         <header className="Searchbar">

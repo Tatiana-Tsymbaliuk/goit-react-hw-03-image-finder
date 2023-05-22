@@ -62,14 +62,15 @@ export default class ImageGallery extends React.Component{
 
         render(){
             const {fotos, loading, showModal, largeImage } = this.state;
-            // const needToShowLoadMore = fotos.length !== 0 &&this.state.currentAmount !== this.state.totalAmount ;          
+        
         return(
           <div> 
            {showModal&& <Modal onClose ={this.toggleModal}>
            <img src={largeImage} alt="" />
            </Modal> }    
           <ul className="ImageGallery">
-           { loading ? (<Loader/> ) : (<ImageGalleryItem items={fotos} onImageClick={this.handleGalleryItem} />)}
+           { loading && <Loader/> } 
+           <ImageGalleryItem items={fotos} onImageClick={this.handleGalleryItem} />
           </ul>
            {fotos.length !== 0 &&
         this.state.currentAmount !== this.state.totalAmount?( <Button onLoadFoto ={this.loadFoto}/>):(false)}
