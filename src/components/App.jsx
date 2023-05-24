@@ -77,7 +77,6 @@ handleFormSubmit = nameSearch=>{
           <div> 
             <Searchbar onSubmit={this.handleFormSubmit}/>
              { loading && <Loader/> } 
-             <div>Vasya</div>
            <ImageGallery fotos={fotos} onImageClick={this.handleGalleryItem}/>
            {showModal&& <Modal onClose ={this.toggleModal}>
            <img src={largeImage} alt="" />
