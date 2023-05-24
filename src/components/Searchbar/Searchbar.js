@@ -4,20 +4,24 @@ import './Searchbar.css'
 
 export default class Searchbar extends React.Component{
         state ={
-        nameSearch: '',
+        nameSearch:'',
         }
 handleNameChange = event=>{
-        this.setState({nameSearch:event.currentTarget.value})
+        const { name, value } = event.currentTarget;
+
+            this.setState({
+              [name]: value,
+            });
 }
 handleSubmit = event=>{
         event.preventDefault();
-        if(this.state.nameSearch.trim()===''){
-                alert('Введите свой поиск');
-                return;
-        }
-        this.props.onSubmit(this.state.nameSearch);
+        if(this.state.nameSearch.trim()=== ''){
+             alert('Введите свой поиск');
+                return;  
+        }  
+         
+             this.props.onSubmit(this.state.nameSearch);
         this.setState({nameSearch:''})
-        // this.resetForm();
 }
 // resetForm = () =>
 //     this.setState({
@@ -28,7 +32,7 @@ handleSubmit = event=>{
                         <header className="Searchbar">
                         <form className="SearchForm " onSubmit = {this.handleSubmit}>
                           <button type="submit" className="SearchForm-button">
-                            <span className="button-label"><FaSistrix className="Icon"/></span>
+                          <span className="button-label"><FaSistrix className="Icon"/></span>
                           </button>
                       
                           <input
