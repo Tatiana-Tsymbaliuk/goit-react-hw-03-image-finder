@@ -4,17 +4,17 @@ import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import '../ImageGallery/ImageGallery.css';
 
 
-const ImageGallery=({items, onImageClick})=>{
-  <ul className="ImageGallery">
-  {items.map(item => {
+const ImageGallery=({fotos, onImageClick})=>{
+  return (<ul className="ImageGallery">
+  {fotos.map(foto => {
     return (
       <ImageGalleryItem
-        key={item.id}
-        image={item}
+        key={foto.id}
+        image={foto}
         onImageClick={onImageClick}
       />
     );
   })}
-</ul>
+</ul>)
 }
 export default ImageGallery;

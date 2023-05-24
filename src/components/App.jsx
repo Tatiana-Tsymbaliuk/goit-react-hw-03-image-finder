@@ -20,7 +20,7 @@ export class App extends React.Component{
   }
 handleFormSubmit = nameSearch=>{
   this.setState({
-    //fotos:[],
+    fotos:[],
     nameSearch: nameSearch,
     currentPage: 1,
     error: null,
@@ -29,15 +29,15 @@ handleFormSubmit = nameSearch=>{
 }
 
 
- componentDidUpdate(prevState){
+ componentDidUpdate(_, prevState){
         const nameSearch =this.state.nameSearch
         const prevName = prevState.nameSearch
-        if(prevName!==nameSearch||this.state.currentPage!==prevState.currentPage){
+        if(prevName!==nameSearch){
                 this.getFoto();     
         }      
       } 
   getFoto = async () =>{         
-    const {nameSearch, currentPage } =this.state.nameSearch
+    const {nameSearch, currentPage } =this.state
     this.setState({loading: true})
     try {
       const {hits, totalHits} = await fetchFoto(nameSearch, currentPage);
@@ -46,7 +46,7 @@ handleFormSubmit = nameSearch=>{
         currentPage: prevState.currentPage + 1,
               })); 
       this.setState({totalAmount: totalHits});
-      // this.setState(prevState =>({currentAmount:prevState.currentAmount + hits.length,}))         
+      this.setState(prevState =>({currentAmount:prevState.currentAmount + hits.length,}))         
             } catch (error) {
               this.setState({ error });
             }finally{
@@ -54,9 +54,7 @@ handleFormSubmit = nameSearch=>{
             }
             }
 
-  // loadFoto = ()=>{
-  //   this.setState(prevState =>({currentPage:prevState.currentPage+1}))   
-  // }
+  
 
   handleGalleryItem = (largeImageSrc) => {   
         this.setState({        
@@ -78,11 +76,13 @@ handleFormSubmit = nameSearch=>{
         return(
           <div> 
             <Searchbar onSubmit={this.handleFormSubmit}/>
-           <ImageGallery items={fotos} onImageClick={this.handleGalleryItem}/>
+             { loading && <Loader/> } 
+             <div>Vasya</div>
+           <ImageGallery fotos={fotos} onImageClick={this.handleGalleryItem}/>
            {showModal&& <Modal onClose ={this.toggleModal}>
            <img src={largeImage} alt="" />
            </Modal> }    
-           { loading && <Loader/> } 
+          
            {fotos.length !== 0 && this.state.currentAmount !== this.state.totalAmount?( <Button onLoadFoto ={this.getFoto}/>):(false)}
           </div>       
           );
