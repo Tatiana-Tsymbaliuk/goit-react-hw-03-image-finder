@@ -53,9 +53,6 @@ handleFormSubmit = nameSearch=>{
             this.setState({loading:false})
             }
             }
-
-  
-
   handleGalleryItem = (largeImageSrc) => {   
         this.setState({        
           largeImage: largeImageSrc,
@@ -82,7 +79,7 @@ handleFormSubmit = nameSearch=>{
            <img src={largeImage} alt="" />
            </Modal> }    
           
-           {fotos.length !== 0 && this.state.currentAmount !== this.state.totalAmount?( <Button onLoadFoto ={this.getFoto}/>):(false)}
+           {(fotos.length !== 0 && this.state.currentAmount !== this.state.totalAmount)?( <Button onLoadFoto ={this.getFoto}/>):(false)}
           </div>       
           );
         } 
