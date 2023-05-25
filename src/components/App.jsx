@@ -69,7 +69,7 @@ handleFormSubmit = nameSearch=>{
 
         render(){
             const {fotos, loading, showModal, largeImage} = this.state;
-        
+            const needToShowLoadMore = fotos.length !== 0 && this.state.currentAmount !== this.state.totalAmount
         return(
           <div> 
             <Searchbar onSubmit={this.handleFormSubmit}/>
@@ -79,7 +79,7 @@ handleFormSubmit = nameSearch=>{
            <img src={largeImage} alt="" />
            </Modal> }    
           
-           {(fotos.length !== 0 && this.state.currentAmount !== this.state.totalAmount)?( <Button onLoadFoto ={this.getFoto}/>):(false)}
+           { needToShowLoadMore ? (<Button onLoadFoto ={this.getFoto}/>) :<></>}
           </div>       
           );
         } 
