@@ -24,8 +24,9 @@ handleFormSubmit = nameSearch=>{
     nameSearch: nameSearch,
     currentPage: 1,
     error: null,
+    totalAmount:'0',
+    currentAmount: 0,
   });
-
 }
 
 
